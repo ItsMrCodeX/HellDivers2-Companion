@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HD2Companion.Mobile.ViewModels"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="HD2Companion.Mobile.Pages.QrScanPage"
+             x:DataType="vm:QrScanViewModel"
+             Title="Scan QR"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="Black">
+
+    <Grid RowDefinitions="*,Auto" Padding="0">
+
+        <zxing:CameraBarcodeReaderView Grid.Row="0"
+                                        x:Name="BarcodeView"
+                                        IsDetecting="{Binding IsScanning}" />
+
+        <VerticalStackLayout Grid.Row="1"
+                             Padding="16,8"
+                             BackgroundColor="#1A1A2E"
+                             Spacing="8">
+            <Label Text="{Binding Status}"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalOptions="Center" />
+            <Button Text="Cancel"
+                     FontSize="14"
+                     BackgroundColor="#5C1A1A"
+                     TextColor="White"
+                     CornerRadius="8"
+                     HeightRequest="40"
+                     Clicked="OnCancel" />
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

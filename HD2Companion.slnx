@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="HD2Companion.Mobile/HD2Companion.Mobile.csproj" />
+  <Project Path="HD2Companion.Server/HD2Companion.Server.csproj" />
+</Solution>

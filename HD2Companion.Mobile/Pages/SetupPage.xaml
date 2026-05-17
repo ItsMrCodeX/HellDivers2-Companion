@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HD2Companion.Mobile.ViewModels"
+             xmlns:models="clr-namespace:HD2Companion.Mobile.Models"
+             xmlns:conv="clr-namespace:HD2Companion.Mobile.Converters"
+             x:Class="HD2Companion.Mobile.Pages.SetupPage"
+             x:DataType="vm:SetupViewModel"
+             Title="Setup"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#1A1A2E">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:CategoryToColorConverter x:Key="CategoryToColor" />
+            <conv:SlotSelectedConverter x:Key="SlotSelected" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView Orientation="Vertical"
+                VerticalScrollBarVisibility="Always">
+        <VerticalStackLayout Spacing="6" Padding="6" MinimumWidthRequest="360">
+
+            <Label Text="{Binding Status}" TextColor="#AAAAAA" FontSize="11" HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <Button Grid.Column="0" Text="Save Loadout" FontSize="12"
+                        BackgroundColor="#0F3460" TextColor="White" CornerRadius="8"
+                        HeightRequest="36" Command="{Binding SaveLoadoutCommand}" />
+                <Button Grid.Column="1" Text="Clear Loadout" FontSize="12"
+                        BackgroundColor="#5C1A1A" TextColor="White" CornerRadius="8"
+                        HeightRequest="36" Command="{Binding ClearLoadoutCommand}" />
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="6" MinimumHeightRequest="140">
+                <!-- Slot 0 -->
+                <Border Grid.Column="0" BackgroundColor="#16213E"
+                        Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=0}"
+                        StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
+                        MinimumWidthRequest="80" MinimumHeightRequest="130">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectSlotCommand}" CommandParameter="0" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" InputTransparent="True">
+                        <Image Source="{Binding Slot0Icon}" Aspect="AspectFit"
+                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="3" />
+                        <Label Text="{Binding Slot0Name, TargetNullValue='Slot 1'}" FontSize="9" TextColor="#E2E2E2"
+                               HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                               LineBreakMode="TailTruncation" MaxLines="2" />
+                    </VerticalStackLayout>
+                </Border>
+                <!-- Slot 1 -->
+                <Border Grid.Column="1" BackgroundColor="#16213E"
+                        Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=1}"
+                        StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
+                        MinimumWidthRequest="80" MinimumHeightRequest="130">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectSlotCommand}" CommandParameter="1" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" InputTransparent="True">
+                        <Image Source="{Binding Slot1Icon}" Aspect="AspectFit"
+                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="3" />
+                        <Label Text="{Binding Slot1Name, TargetNullValue='Slot 2'}" FontSize="9" TextColor="#E2E2E2"
+                               HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                               LineBreakMode="TailTruncation" MaxLines="2" />
+                    </VerticalStackLayout>
+                </Border>
+                <!-- Slot 2 -->
+                <Border Grid.Column="2" BackgroundColor="#16213E"
+                        Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=2}"
+                        StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
+                        MinimumWidthRequest="80" MinimumHeightRequest="130">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectSlotCommand}" CommandParameter="2" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" InputTransparent="True">
+                        <Image Source="{Binding Slot2Icon}" Aspect="AspectFit"
+                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="3" />
+                        <Label Text="{Binding Slot2Name, TargetNullValue='Slot 3'}" FontSize="9" TextColor="#E2E2E2"
+                               HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                               LineBreakMode="TailTruncation" MaxLines="2" />
+                    </VerticalStackLayout>
+                </Border>
+                <!-- Slot 3 -->
+                <Border Grid.Column="3" BackgroundColor="#16213E"
+                        Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=3}"
+                        StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
+                        MinimumWidthRequest="80" MinimumHeightRequest="130">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectSlotCommand}" CommandParameter="3" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" InputTransparent="True">
+                        <Image Source="{Binding Slot3Icon}" Aspect="AspectFit"
+                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="3" />
+                        <Label Text="{Binding Slot3Name, TargetNullValue='Slot 4'}" FontSize="9" TextColor="#E2E2E2"
+                               HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                               LineBreakMode="TailTruncation" MaxLines="2" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Mission Slot -->
+            <Border BackgroundColor="#16213E"
+                    Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=4}"
+                    StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="8" MinimumHeightRequest="52">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectSlotCommand}" CommandParameter="4" />
+                </Border.GestureRecognizers>
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
+                    <Label Grid.Row="0" Text="MISSION" FontSize="13" TextColor="#3B82F6"
+                           FontAttributes="Bold" HorizontalOptions="Start" />
+                    <FlexLayout Grid.Row="1" Wrap="Wrap" Direction="Row" AlignItems="Center"
+                                BindableLayout.ItemsSource="{Binding MissionStrats}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:Stratagem">
+                                <Border BackgroundColor="#0F3460" StrokeShape="RoundRectangle 12"
+                                        Stroke="Transparent" Padding="6,3" Margin="2" HeightRequest="34">
+                                    <HorizontalStackLayout Spacing="4">
+                                        <Image Source="{Binding IconSource}" WidthRequest="20" HeightRequest="20"
+                                               Aspect="AspectFit" VerticalOptions="Center" />
+                                        <Label Text="{Binding Name}" FontSize="10" TextColor="White"
+                                               VerticalOptions="Center" LineBreakMode="TailTruncation" MaximumWidthRequest="110" />
+                                        <Label Text="✕" FontSize="12" TextColor="#E94560"
+                                               VerticalOptions="Center" Padding="4,0">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SetupViewModel}}, Path=RemoveMissionStratagemCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </Grid>
+            </Border>
+
+            <!-- Category Chips -->
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HeightRequest="34">
+                <HorizontalStackLayout Spacing="5" Padding="2,0" BindableLayout.ItemsSource="{Binding Categories}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <Button Text="{Binding .}" FontSize="9" Padding="8,2" CornerRadius="12"
+                                    BackgroundColor="{Binding ., Converter={StaticResource CategoryToColor}}"
+                                    TextColor="White" HeightRequest="26"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SetupViewModel}}, Path=SelectCategoryCommand}"
+                                    CommandParameter="{Binding .}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </HorizontalStackLayout>
+            </ScrollView>
+
+            <!-- Stratagem Grid -->
+            <CollectionView ItemsSource="{Binding AvailableStrats}" SelectionMode="None" HeightRequest="420">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="4" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Stratagem">
+                        <Border BackgroundColor="#16213E" Stroke="#0F3460" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 6" Padding="2" HeightRequest="64">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SetupViewModel}}, Path=TapStratagemCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="1">
+                                <Image Source="{Binding IconSource}" WidthRequest="28" HeightRequest="28"
+                                       Aspect="AspectFit" HorizontalOptions="Center" />
+                                <Label Text="{Binding Name}" FontSize="7" TextColor="#CCCCCC"
+                                       HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                       LineBreakMode="TailTruncation" MaxLines="2" />
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
