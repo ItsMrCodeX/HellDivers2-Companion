@@ -61,7 +61,7 @@ public class StratagemDataService
 
         var size = svg.Picture.CullRect;
         float maxDim = Math.Max(size.Width, size.Height);
-        float scale = maxDim > 0 ? 128f / maxDim : 1f;
+        float scale = maxDim > 0 ? 96f / maxDim : 1f;
 
         var bitmap = new SKBitmap(
             (int)(size.Width * scale),

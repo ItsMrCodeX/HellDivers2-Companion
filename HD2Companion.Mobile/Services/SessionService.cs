@@ -42,7 +42,7 @@ public class SessionService
         foreach (var cat in _dataService.Categories)
             Categories.Add(cat);
 
-        var allStrats = _dataService.GetByCategory(_dataService.Categories.FirstOrDefault() ?? "");
+        var allStrats = _dataService.Categories.SelectMany(c => _dataService.GetByCategory(c));
         Slots.Clear();
         var saved = _prefs.LoadLoadout(allStrats);
         foreach (var slot in saved)

@@ -34,7 +34,7 @@
 
             <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="6" MinimumHeightRequest="140">
                 <!-- Slot 0 -->
-                <Border Grid.Column="0" BackgroundColor="#16213E"
+                <Border Grid.Column="0" BackgroundColor="#1E2430"
                         Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=0}"
                         StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
                         MinimumWidthRequest="80" MinimumHeightRequest="130">
@@ -50,7 +50,7 @@
                     </VerticalStackLayout>
                 </Border>
                 <!-- Slot 1 -->
-                <Border Grid.Column="1" BackgroundColor="#16213E"
+                <Border Grid.Column="1" BackgroundColor="#1E2430"
                         Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=1}"
                         StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
                         MinimumWidthRequest="80" MinimumHeightRequest="130">
@@ -66,7 +66,7 @@
                     </VerticalStackLayout>
                 </Border>
                 <!-- Slot 2 -->
-                <Border Grid.Column="2" BackgroundColor="#16213E"
+                <Border Grid.Column="2" BackgroundColor="#1E2430"
                         Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=2}"
                         StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
                         MinimumWidthRequest="80" MinimumHeightRequest="130">
@@ -82,7 +82,7 @@
                     </VerticalStackLayout>
                 </Border>
                 <!-- Slot 3 -->
-                <Border Grid.Column="3" BackgroundColor="#16213E"
+                <Border Grid.Column="3" BackgroundColor="#1E2430"
                         Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=3}"
                         StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="4"
                         MinimumWidthRequest="80" MinimumHeightRequest="130">
@@ -100,7 +100,7 @@
             </Grid>
 
             <!-- Mission Slot -->
-            <Border BackgroundColor="#16213E"
+            <Border BackgroundColor="#1E2430"
                     Stroke="{Binding SelectedSlotIndex, Converter={StaticResource SlotSelected}, ConverterParameter=4}"
                     StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="8" MinimumHeightRequest="52">
                 <Border.GestureRecognizers>
@@ -154,11 +154,11 @@
             <!-- Stratagem Grid -->
             <CollectionView ItemsSource="{Binding AvailableStrats}" SelectionMode="None" HeightRequest="420">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="4" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                    <GridItemsLayout Orientation="Vertical"                                      Span="3" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Stratagem">
-                        <Border BackgroundColor="#16213E" Stroke="#0F3460" StrokeThickness="1"
+                        <Border BackgroundColor="#1E2430"                                 Stroke="#1A3A5C" StrokeThickness="1"
                                 StrokeShape="RoundRectangle 6" Padding="2" HeightRequest="64">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer

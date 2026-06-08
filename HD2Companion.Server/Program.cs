@@ -17,9 +17,10 @@ var localIps = System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInter
     .SelectMany(n => n.GetIPProperties().UnicastAddresses)
     .Where(a => a.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
     .Select(a => a.Address.ToString())
+    .Where(ip => !ip.StartsWith("127."))
     .ToList();
 
-var mainIp = localIps.FirstOrDefault() ?? "0.0.0.0";
+var mainIp = localIps.LastOrDefault() ?? "0.0.0.0";
 
 Console.WriteLine($"IPs: {string.Join(", ", localIps)}");
 Console.WriteLine($"PIN: {pinManager.CurrentPin}");

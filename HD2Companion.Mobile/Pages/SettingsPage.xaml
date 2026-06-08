@@ -129,7 +129,7 @@
                        PlaceholderColor="#555"
                        BackgroundColor="#16213E"
                        FontSize="14"
-                        Keyboard="Plain" />
+                        Keyboard="Telephone" />
                 <Entry Placeholder="PIN (4 digits)"
                        Text="{Binding PinEntry}"
                        TextColor="White"

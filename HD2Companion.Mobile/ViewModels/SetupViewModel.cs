@@ -123,7 +123,8 @@ public class SetupViewModel : INotifyPropertyChanged
     {
         if (SelectedSlot == null) return;
 
-        var slot = Slots.FirstOrDefault(s => s.SlotIndex == SelectedSlot.SlotIndex);
+        var currentIdx = SelectedSlot.SlotIndex;
+        var slot = Slots.FirstOrDefault(s => s.SlotIndex == currentIdx);
         if (slot == null) return;
 
         slot.SelectedStratagem = stratagem;
@@ -132,8 +133,17 @@ public class SetupViewModel : INotifyPropertyChanged
 
         NotifySlotsChanged();
         _session.SaveLoadout();
-        Status = $"Assigned {stratagem.Name} to Slot {SelectedSlot.SlotIndex + 1}";
-        SelectedSlot = null;
+        Status = $"Assigned {stratagem.Name} to Slot {currentIdx + 1}";
+
+        // Auto-advance to next empty slot
+        var next = Slots
+            .Where(s => s.SlotIndex >= 0 && s.SlotIndex <= 3 && s.SlotIndex > currentIdx && s.SelectedStratagem == null)
+            .OrderBy(s => s.SlotIndex)
+            .FirstOrDefault();
+
+        SelectedSlot = next;
+        if (next != null)
+            Status = $"Slot {next.SlotIndex + 1} selected - tap a stratagem";
     }
 
     private void AddToMission(Stratagem stratagem)
