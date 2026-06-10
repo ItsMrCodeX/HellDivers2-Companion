@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install MAUI workload
+        run: dotnet workload install maui
+
+      - name: Restore
+        run: dotnet restore HD2Companion.slnx
+
+      - name: Get version from tag
+        id: version
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $version = $tag -replace '^v', ''
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Set version
+        run: |
+          $version = "${{ steps.version.outputs.version }}"
+          $propsPath = "Directory.Build.props"
+          $xml = [xml](Get-Content $propsPath)
+          $xml.Project.PropertyGroup.Version = $version
+          $xml.Project.PropertyGroup.AssemblyVersion = $version
+          $xml.Project.PropertyGroup.FileVersion = $version
+          $xml.Save((Resolve-Path $propsPath))
+
+      - name: Publish Server (win-x64)
+        run: dotnet publish HD2Companion.Server -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o artifacts/server
+
+      - name: Build Android APK
+        run: dotnet publish HD2Companion.Mobile -c Release -f net10.0-android -o artifacts/android
+
+      - name: Zip Server
+        run: Compress-Archive -Path artifacts/server/* -DestinationPath artifacts/HD2Companion-Server-${{ steps.version.outputs.version }}-win-x64.zip
+
+      - name: Find APK
+        id: apk
+        run: |
+          $apk = Get-ChildItem -Path artifacts/android -Filter "*.apk" -Recurse | Select-Object -First 1
+          echo "path=$($apk.FullName)" >> $env:GITHUB_OUTPUT
+          echo "name=$($apk.Name)" >> $env:GITHUB_OUTPUT
+
+      - name: Extract changelog
+        id: changelog
+        run: |
+          $content = Get-Content CHANGELOG.md -Raw
+          if ($content -match '## \[${{ steps.version.outputs.version }}\][^\n]*\n\n(.*?)(?=\n## \[|\z)') {
+            $notes = $matches[1].Trim()
+          } else {
+            $notes = "Release ${{ steps.version.outputs.version }}"
+          }
+          echo "notes=$notes" >> $env:GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: v${{ steps.version.outputs.version }}
+          body: ${{ steps.changelog.outputs.notes }}
+          files: |
+            artifacts/HD2Companion-Server-${{ steps.version.outputs.version }}-win-x64.zip
+            ${{ steps.apk.outputs.path }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-preview') }}
