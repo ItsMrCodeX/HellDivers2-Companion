@@ -15,7 +15,7 @@ A tactical companion app for Helldivers 2 that lets you launch stratagems from y
 |---|---|
 | Mobile App | .NET 10 MAUI (Android, iOS) |
 | Desktop Server | .NET 9 Console App (Windows only) |
-| Communication | UDP (port 12345) |
+| Communication | UDP |
 | QR Generation | QRCoder |
 | QR Scanning | ZXing.Net.Maui.Controls |
 | Data | JSON (embedded `stratagems.json`) |
@@ -34,7 +34,7 @@ A tactical companion app for Helldivers 2 that lets you launch stratagems from y
 ### 1. Clone
 
 ```bash
-git clone https://github.com/ItsMrCodeX/HD2-Companion
+git clone https://github.com/ItsMrCodeX/HellDivers2-Companion
 cd HD2-Companion
 ```
 
@@ -44,7 +44,7 @@ cd HD2-Companion
 dotnet restore HD2Companion.slnx
 ```
 
-### 3. Run the Server (on your gaming PC)
+### 3. Run the Server on your PC
 
 ```bash
 dotnet run --project HD2Companion.Server
