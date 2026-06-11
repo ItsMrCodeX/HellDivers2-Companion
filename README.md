@@ -1,6 +1,6 @@
 # HD2 Companion
 
-A tactical companion app for Helldivers 2 that lets you launch stratagems in real-time from your mobile device to your PC. Built with a mobile interface (MAUI) and a lightweight desktop server that emulates keyboard input.
+A tactical companion app for Helldivers 2 that lets you launch stratagems from your mobile device to your PC. Built with a mobile interface (MAUI) and a lightweight desktop server that emulates keyboard input.
 
 ## What it does
 
